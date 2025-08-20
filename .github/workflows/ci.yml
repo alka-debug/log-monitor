@@ -17,3 +17,11 @@ jobs:
 
       - name: Run monitor script
         run: ./monitor.sh
+      - name: Fake tests
+        run: |
+          echo "Running tests..."
+          if [ -f monitor.sh ]; then
+            echo "Test passed: Script exists"
+          else
+            echo "Test failed: Script missing" && exit 1
+          fi
