@@ -31,17 +31,21 @@ jobs:
           cp monitor.sh artifacts/
           echo "Packaged script into artifacts/"
 
-      - name: Deploy
-        run: |
+           - name: Deploy
+              run: |
           mkdir -p deploy
           if [ -f monitor.sh ]; then
             cp monitor.sh deploy/
             echo "Deployed script to deploy/ folder"
+          else
+            echo "Deploy failed: monitor.sh not found" && exit 1
+          fi
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: deployed-scripts
           path: deploy/
-          else
-            echo "Deploy failed: monitor.sh not found" && exit 1
+          echo "Deploy failed: monitor.sh not found" && exit 1
           fi
+            
