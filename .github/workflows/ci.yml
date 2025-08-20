@@ -31,7 +31,7 @@ jobs:
           cp monitor.sh artifacts/
           echo "Packaged script into artifacts/"
 
-           - name: Deploy
+             - name: Deploy
               run: |
           mkdir -p deploy
           if [ -f monitor.sh ]; then
@@ -51,3 +51,5 @@ jobs:
 
 
             
+
+
