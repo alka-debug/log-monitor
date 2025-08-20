@@ -37,6 +37,11 @@ jobs:
           if [ -f monitor.sh ]; then
             cp monitor.sh deploy/
             echo "Deployed script to deploy/ folder"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: deployed-scripts
+          path: deploy/
           else
             echo "Deploy failed: monitor.sh not found" && exit 1
           fi
