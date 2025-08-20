@@ -46,6 +46,8 @@ jobs:
         with:
           name: deployed-scripts
           path: deploy/
-          echo "Deploy failed: monitor.sh not found" && exit 1
-          fi
+         
+         
+
+
             
