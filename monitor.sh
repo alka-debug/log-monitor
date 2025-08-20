@@ -4,7 +4,7 @@ LOGFILE="/var/log/syslog"
 SIZE=$(du -m $LOGFILE | cut -f1)
 SIZE=$((SIZE+0))  # ensure integer
 
-BACKUP_DIR="/home/alka/log-monitor/backups"
+BACKUP_DIR="/home/cupcake/log-monitor/backups"
 
 # make backup dir if not exist
 mkdir -p $BACKUP_DIR
