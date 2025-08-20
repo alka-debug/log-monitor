@@ -31,11 +31,12 @@ jobs:
           cp monitor.sh artifacts/
           echo "Packaged script into artifacts/"
 
-      - name: Deploy stage (simulate)
+      - name: Deploy
         run: |
           mkdir -p deploy
-          cp artifacts/monitor.sh deploy/
-          echo "Deployed script to deploy/ folder"
+          if [ -f monitor.sh ]; then
+            cp monitor.sh deploy/
+            echo "Deployed script to deploy/ folder"
           else
-            echo "Test failed: Script missing" && exit 1
+            echo "Deploy failed: monitor.sh not found" && exit 1
           fi
