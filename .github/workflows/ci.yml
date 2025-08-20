@@ -21,7 +21,10 @@ jobs:
         run: |
           echo "Running tests..."
           if [ -f monitor.sh ]; then
-          echo "Test passed: Script exists"
+            echo "Test passed: Script exists"
+          else
+            echo "Test failed: Script missing" && exit 1
+          fi
       - name: Package artifact
         run: |
           mkdir -p artifacts
