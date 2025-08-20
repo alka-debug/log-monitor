@@ -22,6 +22,17 @@ jobs:
           echo "Running tests..."
           if [ -f monitor.sh ]; then
             echo "Test passed: Script exists"
+      - name: Package artifact
+        run: |
+          mkdir -p artifacts
+          cp monitor.sh artifacts/
+          echo "Packaged script into artifacts/"
+
+      - name: Deploy stage (simulate)
+        run: |
+          mkdir -p deploy
+          cp artifacts/monitor.sh deploy/
+          echo "Deployed script to deploy/ folder"
           else
             echo "Test failed: Script missing" && exit 1
           fi
