@@ -54,7 +54,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t monitor-app .
+          docker build -t log-monitor .
          
 
 
