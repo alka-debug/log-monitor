@@ -59,7 +59,9 @@ jobs:
       
       - name: Build Docker image
         run:  docker build -t log-monitor . 
-         
+        
+      - name: Run Docker container (smoke test)
+        run:  docker run --rm log-monitor echo "Container started OK"
 
 
             
