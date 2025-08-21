@@ -59,7 +59,7 @@ jobs:
       
       - name: Build Docker image
         run: |
-          docker build -t log-monitor -f Dockerfile . 
+          docker build -t log-monitor ./log-monitor . 
          
 
 
