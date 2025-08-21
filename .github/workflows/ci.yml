@@ -9,6 +9,14 @@ jobs:
   release:
     runs-on: ubuntu-latest   # runner (like a virtual Linux machine)
     steps:
+      - name: create github release
+        uses: softprop/action -gh-release@v2
+        with:
+           tag-name: $ {{ github.ref_name }}
+           files: artifacts/*
+        env:
+          GITHUB_TOKEN: $ {{ secrets.GITHUB_TOKEN }}
+       
       - name: Checkout code
         uses: actions/checkout@v4
 
