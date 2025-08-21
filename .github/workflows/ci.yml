@@ -73,7 +73,7 @@ jobs:
 
       - name: Push Docker image
         run: |
-            IMAGE_NAME=ghcr.io/${{ github.repository }}/log-monitor:latest
+            IMAGE_NAME=ghcr.io/${{ log-monitor }}/log-monitor:latest
             docker tag log-monitor $IMAGE_NAME
             docker push $IMAGE_NAME
 
