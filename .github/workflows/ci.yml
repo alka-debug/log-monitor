@@ -65,7 +65,7 @@ jobs:
       - name: Run Docker container (smoke test)
         run:  docker run --rm log-monitor echo "Container started OK"
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+        uses: docker/login-action@v4
         with:
          registry: ghcr.io
          username: ${{ github.actor }}
