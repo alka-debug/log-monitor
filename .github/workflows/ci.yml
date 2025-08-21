@@ -52,9 +52,14 @@ jobs:
           echo "Running tests..."
           bash monitor.sh || true
 
+      - name: Debug working dir
+        run: |
+          pwd
+          ls -l 
+      
       - name: Build Docker image
         run: |
-          docker build -t log-monitor .
+          docker build -t log-monitor -f Dockerfile . 
          
 
 
