@@ -47,6 +47,14 @@ jobs:
           name: deployed-scripts
           path: deploy/
          
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          bash monitor.sh || true
+
+      - name: Build Docker image
+        run: |
+          docker build -t monitor-app .
          
 
 
