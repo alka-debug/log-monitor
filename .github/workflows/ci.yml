@@ -58,8 +58,7 @@ jobs:
           ls -l 
       
       - name: Build Docker image
-        run: |
-          docker build -t log-monitor ./log-monitor . 
+        run:  docker build -t log-monitor . 
          
 
 
