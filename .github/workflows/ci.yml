@@ -3,11 +3,12 @@ name: CI Pipeline   # workflow name
 on:
   push:
     branches: [ "main" ]   # trigger when we push to main branch
-
+    tags:
+      - 'v*'
 jobs:
-  build-and-test:
+  release:
     runs-on: ubuntu-latest   # runner (like a virtual Linux machine)
-    
+    if: startsWith(github.ref, 'refs/tag/')
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,7 +31,13 @@ jobs:
           mkdir -p artifacts
           cp monitor.sh artifacts/
           echo "Packaged script into artifacts/"
-
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy
         run: |
           mkdir -p deploy
