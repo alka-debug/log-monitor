@@ -57,7 +57,7 @@ jobs:
           pwd
           ls -l 
       - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u alka-debug --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Build Docker image
         run:  docker build -t log-monitor . 
@@ -65,7 +65,7 @@ jobs:
       - name: Run Docker container (smoke test)
         run:  docker run --rm log-monitor echo "Container started OK"
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v4
+        uses: docker/login-action@v3
         with:
          registry: ghcr.io
          username: ${{ github.actor }}
@@ -74,8 +74,8 @@ jobs:
       - name: Push Docker image
         run: |
             IMAGE_NAME=ghcr.io/${{ github.actor }}/log-monitor:latest
-            docker tag log-monitor $IMAGE_NAME
-            docker push $IMAGE_NAME
+            docker tag log-monitor ghcr.io/${{ github.repository_owner }}/log-monitor:latest
+            docker push ghcr.io/${{ github.repository_owner }}/log-monitor:latest
 
 
             
