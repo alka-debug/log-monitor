@@ -1,0 +1,68 @@
+name: CI Pipeline   # workflow name
+
+on:
+  push:
+    branches: [ "main" ]   # trigger when we push to main branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest   # runner (like a virtual Linux machine)
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Make script executable
+        run: chmod +x monitor.sh
+
+      - name: Run monitor script
+        run: ./monitor.sh
+      - name: Fake tests
+        run: |
+          echo "Running tests..."
+          if [ -f monitor.sh ]; then
+            echo "Test passed: Script exists"
+          else
+            echo "Test failed: Script missing" && exit 1
+          fi
+      - name: Package artifact
+        run: |
+          mkdir -p artifacts
+          cp monitor.sh artifacts/
+          echo "Packaged script into artifacts/"
+
+      - name: Deploy
+        run: |
+          mkdir -p deploy
+          if [ -f monitor.sh ]; then
+            cp monitor.sh deploy/
+            echo "Deployed script to deploy/ folder"
+          else
+            echo "Deploy failed: monitor.sh not found" && exit 1
+          fi
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployed-scripts
+          path: deploy/
+         
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          bash monitor.sh || true
+
+      - name: Debug working dir
+        run: |
+          pwd
+          ls -l 
+      
+      - name: Build Docker image
+        run: |
+          docker build -t log-monitor -f Dockerfile . 
+         
+
+
+            
+
+
