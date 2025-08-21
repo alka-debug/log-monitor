@@ -68,12 +68,12 @@ jobs:
         uses: docker/login-action@v3
         with:
          registry: ghcr.io
-         username: ${{ github.actor }}
+         username: ${{ alka-debug }}
          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Docker image
         run: |
-            IMAGE_NAME=ghcr.io/${{ log-monitor }}/log-monitor:latest
+            IMAGE_NAME=ghcr.io/${{ github.repositories }}/log-monitor:latest
             docker tag log-monitor $IMAGE_NAME
             docker push $IMAGE_NAME
 
