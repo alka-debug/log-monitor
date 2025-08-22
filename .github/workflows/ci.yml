@@ -5,9 +5,11 @@ on:
     branches: [ "main" ]   # trigger when we push to main branch
     tags:
       - 'v*'
+         
 jobs:
   release:
     runs-on: ubuntu-latest   # runner (like a virtual Linux machine)
+    if: startsWith(github.ref, 'refs/tags')
     steps:
       - name: create github release
         uses: softprops/action-gh-release@v2
