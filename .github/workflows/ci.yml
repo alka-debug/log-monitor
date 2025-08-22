@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest   # runner (like a virtual Linux machine)
     steps:
       - name: create github release
-        uses: softpropS/action-gh-release@v2
+        uses: softprops/action-gh-release@v2
         with:
            tag-name: $ {{ github.ref_name }}
            files: artifacts/*
