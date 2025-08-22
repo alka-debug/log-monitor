@@ -16,7 +16,7 @@ jobs:
            name: Release ${{ github.ref_name }}           
            files: artifacts/*
         env:
-          GITHUB_TOKEN: $ {{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        
       - name: Checkout code
         uses: actions/checkout@v4
@@ -39,7 +39,11 @@ jobs:
           mkdir -p artifacts
           cp monitor.sh artifacts/
           echo "Packaged script into artifacts/"
-      
+      - name: Debug artifacts
+        run: |
+         echo "Listing artifacts directory..."
+         ls -l artifacts || echo "artifacts folder missing!"
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
